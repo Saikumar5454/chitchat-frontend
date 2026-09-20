@@ -1,24 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
-
+import { useCallback, useState } from 'react';
+import { Auth } from './Auth';
+import { Chat } from './Chat';
 function App() {
+  const [token, setToken] = useState(() => localStorage.getItem('chat_token'));
+  const logout = useCallback(() => {
+    localStorage.removeItem('chat_token');
+    setToken(null);
+  }, []);
+
+  if (!token) {
+    return <main className="app-shell"><Auth onAuthenticated={setToken} /></main>;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="app-shell">
+      <Chat token={token} onLogout={logout} />
+    </main>
   );
 }
 
