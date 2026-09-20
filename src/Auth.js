@@ -138,7 +138,7 @@ export const Auth = ({ onAuthenticated }) => {
                 </button>
                 {mode === 'login' && <button type="button" className="text-button auth-switch" onClick={() => { setMode('otp'); setOtpStep('request'); setError(''); }}>Log in with email OTP</button>}
             </div>
-            {error && <p className="auth-error" role="alert">{error}</p>}
+            {error && <p className="auth-error" role="alert">{error}<h1>Errorrerer</h1></p>}
         </section>
     );
 };
